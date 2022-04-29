@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='customer.css')}}">
+    <title>Document</title>
+</head>
+<body id='index'>
+        <style>
+        body {
+            background-image: url("https://cdn.wallpapersafari.com/46/94/lS3eCo.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+    </style>
+    <div>
+        <h1>Filter Dataset</h1>
+        <div class='Query—product'>
+            <div class="update">
+                <form class='form' action="/query" method="POST">
+                    <label for="BORO"></label>
+                    BORO:
+                    <select name="BORO" id="BORO">
+                        <option></option>
+                        <option value="BROOKLYN">Brooklyn</option>
+                        <option value="MANHATTAN">Manhattan</option>
+                        <option value="BRONX">Bronx</option>
+                        <option value="QUEENS">Queens</option>
+                        <option value="STATEN ISLAND">Staten Island</option>
+                    </select>
+
+                    <input type="submit" value='Update record'>
+                </form>
+                
+            </div>
+
+        </div>
+        
+        <table border="1">
+          <div class='query_result'>
+          <tr>
+            <th> INCIDENT_KEY </th>
+            <th> BOROUGH </th>
+            <th> OCCUR_DATE </th>
+            <th> OCCUR_TIME </th>
+             <th> total_number_of_incident </th>
+            <th> safety_index </th>
+            
+          </tr>
+          {% for result in query_result %}
+          <div class='product'>
+              
+                <tr>
+                <td>{{result.INCIDENT_KEY}}</td>
+                <td>{{result.BORO}}</td>
+                <td>{{result.OCCUR_DATE}}</td>
+                <td>{{result.OCCUR_TIME}}</td>
+                <td>{{result.total_number_of_incident}}</td>
+                <td>{{result.safety_index}}</td>
+                </tr>
+                
+          </div>
+          {% endfor %}
+          </div>
+        </table>
+        
+    </div>
+    {% block javascript %}
+    <script src="{{ url_for('static',filename='index.js') }}"></script>
+    {% endblock %}
+</body>
+
+</html>
